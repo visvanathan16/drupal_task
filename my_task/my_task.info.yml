@@ -1,0 +1,6 @@
+# my_task/my_task.info.yml
+name: My Task Module
+description: A simple custom module to achive the task.
+type: module
+core_version_requirement: ^9 || ^10 || ^11
+package: Custom

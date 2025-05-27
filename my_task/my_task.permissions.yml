@@ -1,0 +1,5 @@
+# my_task/my_task.permissions.yml
+administer mock reviews api:
+  title: 'Administer Mock Reviews API settings'
+  description: 'Allows configuration and clearing of the Mock Reviews API cache.'
+  restrict access: true # Best practice for administrative permissions

@@ -1,0 +1,4 @@
+services:
+  mock_reviews_api.client:
+    class: Drupal\my_task\MockReviewsApiClient
+    arguments: ['@http_client', '@serializer', '@cache.data'] # Example arguments

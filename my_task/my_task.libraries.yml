@@ -1,0 +1,14 @@
+slick:
+  version: 1.x
+  css:
+    theme:
+      css/style.css: {}
+      vendor/slick/slick.css: {}
+      vendor/slick/slick-theme.css: {}
+  js:
+    vendor/slick/slick.min.js: {}
+    js/slick-init.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.once

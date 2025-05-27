@@ -1,0 +1,325 @@
+/*
+ * @file
+ * Styles for the Latest Reviews Block module.
+ */
+
+/* --- Overall Block Container (Optional, but good practice) --- */
+.latest-reviews-block {
+  /* Add any block-level padding or background here if needed */
+  padding: 20px 0; /* Example */
+  background-color: #f8f8f8; /* Example */
+}
+
+/* --- Main Layout Wrapper (Flexbox for two columns) --- */
+.reviews-wrapper {
+  display: flex; /* Use flexbox for two columns */
+  flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+  max-width: 1200px; /* Max width for the whole section */
+  margin: 50px auto; /* Center the wrapper */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  gap: 30px; /* Spacing between the two columns */
+  position: relative; /* Important for absolute positioning of carousel arrows if outside the reviews-carousel-column */
+}
+
+/* --- COLUMN 1: Review Summary Styles --- */
+.reviews-summary-column {
+  flex: 1; /* Allow to grow and shrink */
+  min-width: 150px; /* Minimum width before wrapping */
+  padding-right: 15px; /* Space between summary and carousel */
+  border-right: 1px solid #eee; /* Optional separator line */
+  box-sizing: border-box; /* Include padding in width */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Distribute space */
+}
+
+.summary-rating-string {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center; /* Center the text */
+}
+
+.summary-average-rating {
+  margin-bottom: 15px;
+  text-align: center; /* Center the stars */
+}
+
+.summary-average-rating .rating-stars {
+  font-size: 2.2em; /* Larger stars for summary */
+  color: #ffc107; /* Gold color for stars */
+  white-space: nowrap; /* Prevent stars from wrapping */
+}
+
+.summary-average-rating .rating-stars .star.full {
+  color: #ffc107; /* Full star color */
+}
+
+/* For half stars, you'd typically use a masked icon or a background image */
+/* For simplicity, we'll just show an empty star here for half */
+.summary-average-rating .rating-stars .star.half {
+    color: #ffc107; /* Still show gold for half, or make it a different shade */
+    /* A more advanced solution would use a pseudo-element with clip-path or a background image */
+}
+
+.summary-average-rating .rating-stars .star.empty {
+  color: #ccc; /* Grey color for empty stars */
+}
+
+.summary-total-reviews {
+  font-size: 1em;
+  color: #777;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.summary-logo {
+  text-align: center;
+  margin-top: auto; /* Push logo to the bottom */
+}
+
+.summary-logo img {
+  opacity: 0.8;
+}
+
+.no-summary-data {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
+
+
+/* --- COLUMN 2: Reviews Carousel Styles --- */
+.reviews-carousel-column {
+  flex: 2; /* Allow to grow, taking up more space than summary */
+  min-width: 600px; /* Minimum width for carousel before wrapping */
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* --- Individual Review Item Styles (within carousel) --- */
+.review-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 15px; /* Provides spacing between carousel items */
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 250px; /* Fixed height for consistent display, adjust as needed */
+    display: flex !important; /* Important for flex layout inside review item */
+    flex-direction: column;
+    justify-content: space-between; /* Distribute content vertically */
+}
+
+.review-item .review-header {
+  margin-bottom: 10px;
+}
+
+.review-item .review-item-rating {
+    color: #ffc107; /* Star color */
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.review-item .review-item-rating .star.full {
+    color: #ffc107;
+}
+.review-item .review-item-rating .star.empty {
+    color: #ccc;
+}
+
+.review-item .review-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    white-space: nowrap; /* Prevent title from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review-item .review-content {
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.4;
+    flex-grow: 1; /* Allows content to take up available space */
+    overflow: hidden; /* Prevent content from overflowing if too long */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+    text-align: left; /* Align content left within its box */
+}
+
+.review-item .review-footer {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 10px;
+    text-align: right; /* Align footer right */
+}
+
+.review-item .review-footer .author {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.review-item .review-footer .date {
+    font-weight: normal;
+}
+
+.no-reviews-carousel {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+}
+
+/* --- Slick Carousel Overrides & Arrow Styling --- */
+
+/* Adjust the carousel wrapper itself to compensate for item margins */
+.reviews-carousel.slick-slider {
+  margin: 0 -15px; /* Matches the horizontal margin of .review-item */
+  box-sizing: border-box;
+}
+
+/* Ensure the slick-list (the viewport) hides overflow */
+.reviews-carousel.slick-slider .slick-list {
+  overflow: hidden !important; /* CRITICAL for carousel behavior */
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 250px; /* Example min-height, adjust as needed */
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* General styles for both arrow buttons */
+.slick-prev,
+.slick-next {
+  z-index: 1000 !important;
+  right: -50px !important;
+  opacity: 1 !important;
+  display: block !important;
+  cursor: pointer !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-radius: 50% !important;
+  width: 45px !important;
+  height: 45px !important;
+  line-height: 1 !important;
+  font-size: 0 !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for arrows */
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Specific positioning for the LEFT arrow (slick-prev) */
+/* Position relative to .reviews-wrapper */
+.slick-prev {
+  left: -25px !important; /* Adjust if your .reviews-wrapper has padding */
+  right: auto !important;
+}
+
+/* Specific positioning for the RIGHT arrow (slick-next) */
+/* Position relative to .reviews-wrapper */
+.slick-next {
+  right: -25px !important; /* Adjust if your .reviews-wrapper has padding */
+  left: auto !important;
+}
+
+/* Style the actual arrow icon inside the button */
+.slick-prev:before,
+.slick-next:before {
+  font-family: 'slick' !important; /* CRUCIAL: This font contains the arrow icons */
+  font-size: 26px !important;
+  line-height: 1 !important;
+  opacity: 0.85 !important;
+  color: #fff !important;
+  text-align: center;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Unicode characters for arrows */
+.slick-prev:before { content: '\2190' !important; }
+.slick-next:before { content: '\2192' !important; }
+
+/* --- Dot Navigation Styling --- */
+.slick-dots {
+    bottom: -30px !important;
+}
+
+.slick-dots li button:before {
+    font-size: 10px !important;
+    color: #ccc !important;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #333 !important;
+}
+
+
+/* --- Responsive adjustments for two-column layout --- */
+@media (max-width: 1024px) {
+  .review-item {
+    margin: 0 10px;
+  }
+  .reviews-carousel.slick-slider {
+    margin: 0 -10px;
+  }
+  .reviews-summary-column {
+      padding-right: 15px;
+  }
+  .reviews-carousel-column {
+      min-width: 450px; /* Allow carousel column to shrink a bit more */
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews-wrapper {
+      flex-direction: column; /* Stack columns vertically on small screens */
+      gap: 20px; /* Adjust gap when stacked */
+      padding: 15px; /* Adjust overall padding */
+  }
+
+  .reviews-summary-column {
+      flex: none; /* Disable flex growth */
+      width: 100%; /* Take full width */
+      padding-right: 0; /* Remove right padding */
+      border-right: none; /* Remove separator */
+      padding-bottom: 20px; /* Add padding at bottom when stacked */
+      border-bottom: 1px solid #eee; /* Add bottom separator */
+      min-width: auto; /* Remove min-width restriction */
+  }
+
+  .reviews-carousel-column {
+      flex: none; /* Disable flex growth */
+      width: 100%; /* Take full width */
+      min-width: auto; /* Remove min-width restriction */
+  }
+
+  .slick-prev,
+  .slick-next {
+    display: none !important; /* Hide arrows on small screens */
+  }
+  .review-item {
+    margin: 0 5px;
+  }
+  .reviews-carousel.slick-slider {
+    margin: 0 -5px;
+  }
+  .slick-dots {
+    bottom: 5px !important; /* Adjust dots position on mobile */
+  }
+}

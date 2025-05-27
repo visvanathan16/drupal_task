@@ -1,0 +1,17 @@
+# my_task/my_task.routing.yml
+my_task.reviews:
+  path: '/mock-reviews'
+  defaults:
+    _controller: '\Drupal\my_task\Controller\ReviewController::getReviews'
+    _format: json # This is crucial for returning JSON by default
+  methods: [GET] # This route only responds to GET requests
+  requirements:
+    _permission: 'access content' # Or a more specific permission like 'access mock reviews api'
+
+my_task.clear_api_cache_form:
+  path: '/admin/config/mock-reviews/clear-cache'
+  defaults:
+    _form: '\Drupal\my_task\Form\ClearApiCacheForm'
+    _title: 'Clear Mock Reviews API Cache'
+  requirements:
+    _permission: 'administer mock reviews api' # We'll define this new permission

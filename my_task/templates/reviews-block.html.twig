@@ -1,0 +1,100 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the latest reviews block.
+ *
+ * Available variables:
+ * - reviews: An array of individual review data (author, rating, title, content, date).
+ * - total_reviews: Total number of reviews available from the API.
+ * - average_rating: The calculated average rating (e.g., 4.5).
+ * - average_rating_string: A descriptive string for the average rating (e.g., "Excellent").
+ */
+#}
+<div class="latest-reviews-block">
+  <div class="reviews-wrapper"> {# Main container for the two columns #}
+
+    {# COLUMN 1: High-level Rating Data #}
+    <div class="reviews-summary-column">
+      
+      {% if total_reviews > 0 %}
+       
+         <div class="summary-rating-string">
+          {{ average_rating_string }}
+        </div>
+
+        <div class="summary-average-rating">
+          <div class="rating-stars">
+            {# Display average rating stars (handle half stars visually if possible with CSS/icons) #}
+            {% for i in 1..5 %}
+              {% if i <= average_rating %}
+                <span class="star full">★</span>
+              {% elseif i - 0.5 == average_rating %}
+                <span class="star half">★</span> {# Placeholder for a half-star representation #}
+              {% else %}
+                <span class="star empty">☆</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+         <div class="summary-total-reviews">
+          Based on  {{ total_reviews }} {{ 'reviews'|t }}
+        </div>
+
+       
+
+        <div class="summary-logo">
+        <img src="{{ file_url('modules/custom/my_task/images/general.jpg') }}" alt="Sample Image" loading="lazy">
+
+        </div>
+      {% else %}
+        <div class="no-summary-data">
+          <p>{{ 'No reviews available to summarize.'|t }}</p>
+          <div class="summary-logo">
+          <img src="{{ file_url('modules/custom/my_task/images/general.jpg') }}" alt="Sample Image" loading="lazy">
+          </div>
+        </div>
+      {% endif %}
+    </div> {# End reviews-summary-column #}
+
+    {# COLUMN 2: Slick Carousel with Individual Reviews #}
+    <div class="reviews-carousel-column">
+      {% if reviews %}
+        {# The 'slick-slider' class is essential for your JavaScript to initialize Slick Carousel #}
+        <div class="reviews-carousel slick-slider">
+          {% for review in reviews %}
+            <div class="review-item">
+              <div class="review-header">
+                {# Individual review rating stars #}
+                <div class="review-item-rating">
+                  {% for i in 1..5 %}
+                    {% if i <= review.rating %}
+                      <span class="star full">★</span>
+                    {% else %}
+                      <span class="star empty">☆</span>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <h3 class="review-title">{{ review.title }}</h3>
+              </div>
+              <div class="review-content">
+                {# Use 'striptags' to remove any HTML from the content for safer display #}
+                {# 'truncate' to keep content concise in the carousel #}
+                {{ review.content|slice(0,15) ~ (review.content|length > 15 ? '…') }}
+              </div>
+              <div class="review-footer">
+                <span class="author">{{ review.author }}</span>
+                {% if review.date %}, <span class="date">{{ review.date }}</span>{% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="no-reviews-carousel">
+          <p>{{ 'No individual reviews to display in the carousel at this time.'|t }}</p>
+        </div>
+      {% endif %}
+    </div> {# End reviews-carousel-column #}
+
+  </div> {# End reviews-wrapper #}
+</div> {# End latest-reviews-block #}

@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Mock Reviews API module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function my_task_theme($existing_theme, $type, $theme, $path) {
+  return [
+    'reviews_block' => [
+      'variables' => ['reviews' => NULL,
+      'total_reviews' => NULL,
+      'average_rating' => NULL,
+      'average_rating_string' =>NULL],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_help().
+ */
+function my_task_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.my_task':
+      return '<p>' . t('This module provides a mock API endpoint and a custom block to display latest reviews.') . '</p>';
+  }
+}
